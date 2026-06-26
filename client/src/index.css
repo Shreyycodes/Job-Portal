@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap'); /*custom font support for our app */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    font-family: Outfit;
+}
+
+@layer base{
+    html{
+        scroll-behavior: smooth;
+    }
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
+
+.rich-text{
+    font-size:15px;
+    font-weight:400;
+    line-height:25px;
+    color:#7A7B7D;
+}
+
+.rich-text p{
+    margin-bottom:38px;
+}
+
+.rich-text h1{
+    font-size:24px;
+    font-weight:600;
+    line-height:32px;
+    color:#252525;
+    margin-bottom:32px;
+}
+
+.rich-text h2{
+    font-size:20px;
+    font-weight:600;
+    line-height:28px;
+    color:#252525;
+    margin-top:48px;
+    margin-bottom:24px;
+}
+
+.rich-text ol{
+    margin-left:28px;
+    list-style:decimal;
+}
+
+.rich-text ul{
+    margin-left:28px;
+    list-style:disc;
+}
+
+.rich-text li{
+    margin-bottom:10px;
+    line-height:25px;
+}
