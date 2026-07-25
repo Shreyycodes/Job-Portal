@@ -1,5 +1,4 @@
 import { Webhook } from "svix";
-import user from "../models/user.js"
 import User from "../models/user.js";
 
 // API Controller Function to Manage Clerk User with database
@@ -17,11 +16,11 @@ export const clerkWebhooks = async (req, res) => {
 
         // Getting Data from request body
         const {data, type} = req.body
-
+        
         // Switch Cases for differernt Events
         switch(type){
 
-            case 'user-created':{
+            case 'user.created':{
                 const userData = {
                     _id: data.id,
                     email: data.email_addresses[0].email_address,
@@ -29,12 +28,19 @@ export const clerkWebhooks = async (req, res) => {
                     image: data.image_url,
                     resume: ''
                 }
-                await User.create(userData)
-                res.json({})
+
+                try {
+                 const createdUser = await User.create(userData);
+                 console.log("Mongo User:", createdUser);
+                } catch (err) {
+                 console.error("Mongo Error:", err);
+                }
+
+                res.json({});
                 break;
             }
 
-            case 'user-updated':{
+            case 'user.updated':{
                 const userData = {
                     _id: data.id,
                     email: data.email_addresses[0].email_address,
@@ -47,8 +53,8 @@ export const clerkWebhooks = async (req, res) => {
                 break;
             }
 
-            case 'user-deleted':{
-                await User.findByIdAndUpdate(data.id)
+            case 'user.deleted':{
+                await User.findByIdAndDelete(data.id)
                 res.json({})
                 break;
             }
@@ -56,7 +62,11 @@ export const clerkWebhooks = async (req, res) => {
             break;
         }
     } catch (error) {
-        console.log(error.message);
-        res.json({success:false, message:'Webhooks Error'})
-    }
+    console.error("Webhook Error:", error);
+    console.error(error);
+    res.status(500).json({
+        success: false,
+        message: error.message
+    });
+}
 }
