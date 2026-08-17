@@ -2,6 +2,7 @@ import './config/instrument.js'
 import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
+
 import connectDB from './config/db.js'
 import * as Sentry from "@sentry/node";
 import { clerkWebhooks } from './controllers/webhooks.js'
@@ -18,15 +19,17 @@ const app = express()
 //Middlewares
 app.use(cors())
 app.use(express.json())
-app.use(clerkMiddleware())
+//app.use(clerkMiddleware())
 
 //DB connection
 await connectDB()
+
 await connectCloudinary()
 
 //Routes
 app.get('/',(req,res) => res.send("API is Working"))
-app. get (" ", function mainHandler(req, res) {
+
+app.get (" ", function mainHandler(req, res) {
   throw new Error("My first Sentry error!");
 });
 app.post('/webhooks',clerkWebhooks)
