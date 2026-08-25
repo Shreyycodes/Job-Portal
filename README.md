@@ -1,5 +1,7 @@
 # Job Portal
 
+Live Demo: https://job-portal-client-blush-mu.vercel.app
+
 A full-stack MERN Job Portal application that connects job seekers with employers. Users can browse jobs, apply for positions, track applications, while companies can post jobs and manage applicants through a dedicated dashboard.
 
 ## Live Demo
