@@ -6,12 +6,19 @@ import { getAuth } from "@clerk/express";
 
 //Get user data
 export const getUserData = async (req, res) => {
+    try {
+        const auth = getAuth(req);
 
-    return res.json({
-        success: true,
-        message: "user route working"
-    })
-
+        return res.json({
+            success: true,
+            auth
+        });
+    } catch (error) {
+        return res.json({
+            success: false,
+            error: error.message
+        });
+    }
 }
 
 //Apply for a job
