@@ -6,20 +6,12 @@ import { getAuth } from "@clerk/express";
 
 //Get user data
 export const getUserData = async (req, res) => {
-    const { userId } = getAuth(req);
 
-    try {
-        const user = await User.findById(userId);
+    return res.json({
+        success: true,
+        message: "user route working"
+    })
 
-        if (!user) {
-            return res.json({ success: false, message: "User Not Found" });
-        }
-
-        return res.json({ success: true, user });
-
-    } catch (error) {
-        return res.json({ success: false, message: error.message });
-    }
 }
 
 //Apply for a job

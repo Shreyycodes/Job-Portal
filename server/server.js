@@ -12,24 +12,22 @@ import jobRoutes from './routes/jobRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import {clerkMiddleware} from '@clerk/express'
 
-
 //Initialise Express
 const app = express()
 
 //Middlewares
 app.use(cors())
 app.use(express.json())
-//app.use(clerkMiddleware())
+app.use(clerkMiddleware())
 
 //DB connection
 await connectDB()
-
 await connectCloudinary()
 
 //Routes
 app.get('/',(req,res) => res.send("API is Working"))
 
-app.get (" ", function mainHandler(req, res) {
+app.get("/debug-sentry", function mainHandler(req, res) {
   throw new Error("My first Sentry error!");
 });
 app.post('/webhooks',clerkWebhooks)

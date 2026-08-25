@@ -8,6 +8,6 @@ const JobApplicationSchema = new mongoose.Schema({
     date: {type:Number, required:true}
 })
 
-const JobApplication = mongoose.model('JobAppliaction', JobApplicationSchema)
+const JobApplication = mongoose.model('JobApplication', JobApplicationSchema)
 
 export default JobApplication
